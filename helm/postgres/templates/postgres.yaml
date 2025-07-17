@@ -13,11 +13,11 @@ spec:
   {{- if .Values.port }}
   port: {{ .Values.port }}
   {{- end }}
-  {{- if .Values.instances }}
   {{- if .Values.config }}
   config:
 {{ toYaml .Values.config | indent 4 }}
   {{- end }}
+  {{- if .Values.instances }}
   instances:
 {{ toYaml .Values.instances | indent 4 }}
   {{- else }}
