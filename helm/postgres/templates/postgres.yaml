@@ -39,6 +39,13 @@ spec:
           cpu: {{ default "" .Values.instanceCPU | quote }}
           memory: {{ default "" .Values.instanceMemory | quote }}
       {{- end }}
+      sidecars:
+        - name: logs
+          image: busybox
+          command: ['sh', '-c', 'tail -F /pgdata/pg16/log/postgresql-*.log']
+          volumeMounts:
+            - name: database
+              mountPath: /pgdata
   {{- end }}
   backups:
     pgbackrest:
