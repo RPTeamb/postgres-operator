@@ -40,9 +40,12 @@ spec:
           memory: {{ default "" .Values.instanceMemory | quote }}
       {{- end }}
       sidecars:
-        - name: logs
+        logs:
           image: busybox
-          command: ['sh', '-c', 'tail -F /pgdata/pg16/log/postgresql-*.log']
+          command:
+            - sh
+            - -c
+            - tail -F /pgdata/pg{{ .Values.postgresVersion }}/log/postgresql-*.log
           volumeMounts:
             - name: database
               mountPath: /pgdata
